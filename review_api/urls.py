@@ -9,8 +9,8 @@ admin.site.site_title = admin.site.site_header
 admin.site.site_url = None
 
 api_v1 = [
-    url(r'^api/v1/access_token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    url(r'^api/v1/refresh_token/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    url(r'^api/v1/access_token/$', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/v1/refresh_token/$', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     url(r'^api/v1/', include(review_urls))
 ]
 
