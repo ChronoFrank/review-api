@@ -16,7 +16,6 @@ import tempfile
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MEDIA_URL = '/static/'
 ROOT_PATH = os.path.realpath(os.path.dirname(__file__))
 TEMP_PATH = tempfile.gettempdir() or 'c:/temp'
 FILE_STORAGE_ROOT = TEMP_PATH

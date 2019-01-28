@@ -1,21 +1,19 @@
-"""review_api URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.11/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
-"""
-from django.conf.urls import url
+# -*- coding: utf-8 -*-
+from django.conf.urls import url, include
+from rest_framework_simplejwt import views as jwt_views
+from review_api.review import urls as review_urls
 from django.contrib import admin
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+admin.site.site_header = 'Review Api'
+admin.site.site_title = admin.site.site_header
+admin.site.site_url = None
+
+api_v1 = [
+    url(r'^api/v1/access_token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/v1/refresh_token/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    url(r'^api/v1/', include(review_urls))
 ]
+
+urlpatterns = [
+    url(r'^admin/', include(admin.site.urls), name='root'),
+] + api_v1
