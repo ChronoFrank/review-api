@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import url
-from .views import HelloView, UserReviewSingUpView, ReviewModelView
+from django.conf.urls import url, include
+from .views import HelloView, UserReviewViewset
+from .views import ReviewModelViewSet
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+router.register(r'reviews', ReviewModelViewSet)
+router.register(r'users', UserReviewViewset)
 
 urlpatterns = [
     url(r'^review/hello/$', HelloView.as_view(), name="hello"),
-    url(r'^review/user/$', UserReviewSingUpView.as_view(), name='user'),
-    url(r'^review/', ReviewModelView.as_view(), name='reviews'),
+    url(r'^', include(router.urls)),
 ]

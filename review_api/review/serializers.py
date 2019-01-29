@@ -29,11 +29,11 @@ class UserReviewSerializer(serializers.ModelSerializer):
 
 class ReviewSerializer(serializers.ModelSerializer):
     submission_date = serializers.ReadOnlyField()
+    reviewer_name = serializers.ReadOnlyField(source='reviewer.username')
+    reviewer = serializers.PrimaryKeyRelatedField(many=False,
+                                                  queryset=User.objects.filter(is_superuser=False),
+                                                  write_only=True)
 
     class Meta:
         model = Review
-        fields = ('title', 'rating', 'company_name', 'summary', 'submission_date', 'ip_address')
-
-    def create(self, validated_data):
-        review = Review.objects.create(**validated_data)
-        return review
+        fields = ('reviewer_name', 'reviewer', 'title', 'rating', 'company_name', 'summary', 'submission_date', 'ip_address')
