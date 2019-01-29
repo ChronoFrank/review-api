@@ -18,10 +18,10 @@ class Review(models.Model):
     reviewer = models.ForeignKey(User, related_name='reviewer', null=True)
     company_name = models.CharField(max_length=250)
     rating = models.IntegerField(choices=RATING_CHOICES, validators=[MinValueValidator(1), MaxValueValidator(5)])
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=64)
     submission_date = models.DateTimeField(auto_now_add=True)
     ip_address = models.GenericIPAddressField(default='127.0.0.1')
-    summary = models.TextField(max_length=1000)
+    summary = models.TextField(max_length=10000)
 
     def __unicode__(self):
         return u'{0}-{1}'.format(self.company_name, self.title)

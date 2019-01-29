@@ -12,8 +12,6 @@ class HelloView(APIView):
 
     def get(self, request):
         content = {'message': 'Hello, World!'}
-        print request.user
-        print request.META.get('REMOTE_ADDR')
         return Response(content)
 
 
