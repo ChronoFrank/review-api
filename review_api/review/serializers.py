@@ -2,6 +2,7 @@
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.models import User
+from models import Review
 
 
 class UserReviewSerializer(serializers.ModelSerializer):
@@ -25,3 +26,14 @@ class UserReviewSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+
+class ReviewSerializer(serializers.ModelSerializer):
+    submission_date = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Review
+        fields = ('title', 'rating', 'company_name', 'summary', 'submission_date', 'ip_address')
+
+    def create(self, validated_data):
+        review = Review.objects.create(**validated_data)
+        return review
