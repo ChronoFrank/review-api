@@ -49,12 +49,14 @@ class ReviewModelView(APIView):
 
     def post(self, request):
         if request.data:
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            ip_address = x_forwarded_for.split(',')[0] if x_forwarded_for else request.META.get('REMOTE_ADDR')
             data = {
                 "company_name": request.data.get("company_name"),
                 "summary": request.data.get("summary"),
                 "title": request.data.get("title"),
                 "rating": request.data.get("rating"),
-                "ip_address": request.META.get('REMOTE_ADDR'),
+                "ip_address": ip_address,
             }
             serializer = ReviewSerializer(data=data)
             if serializer.is_valid():
