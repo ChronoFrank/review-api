@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third-Party Apps
     'rest_framework',
+    'rest_framework_swagger',
     # Local Apps (Your project's apps)
     'review_api.review',
 ]
