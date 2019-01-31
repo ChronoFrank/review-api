@@ -6,6 +6,7 @@ from models import Review
 
 
 class UserReviewSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
     first_name = serializers.CharField(required=True)
     last_name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
@@ -14,7 +15,7 @@ class UserReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password')
 
     def create(self, validated_data):
         user = User(email=validated_data['email'],
