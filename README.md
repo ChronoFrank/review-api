@@ -52,7 +52,7 @@ python manage.py migrate
 
 #### 6. Run tests to validate everything
 ```
-workon profiles
+workon review_api
 python manage.py test
 
 # if we want to get the coverage report:
