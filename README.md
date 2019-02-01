@@ -56,7 +56,7 @@ workon review_api
 python manage.py test
 
 # if we want to get the coverage report:
-coverage run manage.py test; coverage report -m; coverage html -d cover/
+coverage run --source='.' manage.py test review_api; coverage report
 ```
 #### 7. Run the server:
 ```
